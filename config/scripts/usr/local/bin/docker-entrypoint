@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo 'Looking for scripts to execute'
+
+for f in /docker-entrypoint-initphp.d/*; do
+    case "$f" in
+        *.sh) echo "$0: running $f"; . "$f" ;;
+        *)    echo "$0: ignoring $f" ;;
+    esac
+done
+
+echo 'End of executing scripts'
+echo
+
+exec "php-fpm"
